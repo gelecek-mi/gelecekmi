@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>IS EMINE HOCA COMING</title>
+<title>emine hoca gelcek mi</title>
 <meta charset="UTF-8">
 <style>
 body {
@@ -49,7 +49,7 @@ canvas {
   <div style="font-size:18px;margin-top:10px;">⚠️ SOUND ON ⚠️</div>
 </div>
 
-<h1>IS EMINE HOCA COMING???</h1>
+<h1>emine hoca gelio mu???</h1>
 
 <p>visitors: 4380</p>
 
@@ -58,22 +58,23 @@ canvas {
 <button onclick="getAnswer()">FIND OUT</button>
 
 <br><br>
-<b>SPIN THE WHEEL</b><br>
+<b>carkifelek</b><br>
 <canvas id="wheel" width="280" height="280"></canvas>
-<button onclick="spin()">SPIN</button>
+<button onclick="spin()">cevir</button>
 <p id="result"></p>
 
 <script>
 const answers = [
-  "YES", "NO", "MAYBE", "NOT A CHANCE",
-  "PROBABLY", "WHO KNOWS", "SHE'S SICK", "COMING LATE"
+  "evet", "hayir", "belki", "imkani yok",
+  "belki", "allah bilir", "hasta", "gec"
 ];
 
 function getAnswer() {
   document.getElementById('answer').textContent = answers[Math.floor(Math.random() * answers.length)];
 }
 
-const segments = ["YES!!!", "NO", "MAYBE", "DEFINITELY NOT", "COMING LATE", "SHE'S SICK", "PROBABLY", "NO WAY"];
+const segments = "evet", "hayir", "belki", "imkani yok",
+  "belki", "allah bilir", "hasta", "gec"];
 const colors = ["#ff4444","#44ff44","#4444ff","#ffff44","#ff44ff","#44ffff","#ff8844","#88ff44"];
 const canvas = document.getElementById('wheel');
 const ctx = canvas.getContext('2d');
