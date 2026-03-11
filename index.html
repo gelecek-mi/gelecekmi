@@ -13,108 +13,18 @@ body {
     font-family: Comic Sans MS, cursive;
     text-align: center;
     min-height: 100vh;
-    padding-bottom: 70px;
 }
-h1 {
-    font-size: 36px;
-    color: red;
-    text-shadow: 2px 2px 0px yellow, -1px -1px 0px black;
-}
-.answer {
-    font-size: 32px;
-    font-weight: bold;
-    background: yellow;
-    border: 3px solid black;
-    padding: 10px;
-    display: inline-block;
-    margin: 10px;
-}
-button {
-    font-family: Comic Sans MS, cursive;
-    font-size: 18px;
-    padding: 8px 20px;
-    cursor: pointer;
-    margin: 5px;
-}
-canvas {
-    border: 3px solid black;
-    border-radius: 50%;
-    display: block;
-    margin: 10px auto;
-    background: white;
-}
-p, b {
-    background: rgba(255,255,255,0.6);
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 4px;
-}
-
-/* PLAYER BAR */
-#player-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: black;
-    border-top: 3px solid yellow;
-    display: flex;
-    align-items: center;
-    padding: 8px 16px;
-    box-sizing: border-box;
-    gap: 12px;
-    z-index: 1000;
-}
-#play-btn {
-    font-size: 20px;
-    background: yellow;
-    border: 2px solid black;
-    border-radius: 4px;
-    padding: 4px 12px;
-    cursor: pointer;
-    font-family: Comic Sans MS, cursive;
-    flex-shrink: 0;
-}
-#play-btn:hover { background: #ffdd00; }
-#song-title {
-    color: yellow;
-    font-family: Comic Sans MS, cursive;
-    font-size: 13px;
-    white-space: nowrap;
-    overflow: hidden;
-    flex-shrink: 0;
-}
-#progress-container {
-    flex: 1;
-    height: 10px;
-    background: #333;
-    border: 2px solid yellow;
-    border-radius: 5px;
-    cursor: pointer;
-    position: relative;
-}
-#progress-bar {
-    height: 100%;
-    background: yellow;
-    border-radius: 3px;
-    width: 0%;
-    pointer-events: none;
-}
-#volume-icon {
-    font-size: 18px;
-    flex-shrink: 0;
-}
-#volume-slider {
-    width: 70px;
-    accent-color: yellow;
-    flex-shrink: 0;
-}
+h1 { font-size: 36px; color: red; text-shadow: 2px 2px 0px yellow, -1px -1px 0px black; }
+.answer { font-size: 32px; font-weight: bold; background: yellow; border: 3px solid black; padding: 10px; display: inline-block; margin: 10px; }
+button { font-family: Comic Sans MS, cursive; font-size: 18px; padding: 8px 20px; cursor: pointer; margin: 5px; }
+canvas { border: 3px solid black; border-radius: 50%; display: block; margin: 10px auto; background: white; }
+p, b { background: rgba(255,255,255,0.6); display: inline-block; padding: 2px 8px; border-radius: 4px; }
 </style>
 </head>
 <body>
-<audio id="song" src="http://eminehocagelecekmi.xyz/rock_and_roll_mcdonalds.mp3" loop></audio>
+<audio id="song" src="http://eminehocagelecekmi.xyz/rock_and_roll_mcdonalds.mp3" loop controls></audio>
 
-<div id="splash" style="position:fixed;top:0;left:0;width:100%;height:100%;background:black;color:yellow;font-family:Comic Sans MS,cursive;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;cursor:pointer;" onclick="startMusic()">
+<div id="splash" style="position:fixed;top:0;left:0;width:100%;height:100%;background:black;color:yellow;font-family:Comic Sans MS,cursive;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;cursor:pointer;" onclick="document.getElementById('song').play();this.style.display='none'">
   <div style="font-size:36px;font-weight:bold;">CLICK TO ENTER</div>
   <div style="font-size:18px;margin-top:10px;">⚠️ SOUND ON ⚠️</div>
 </div>
@@ -130,56 +40,7 @@ p, b {
 <button onclick="spin()">cevir</button>
 <p id="result"></p>
 
-<!-- PLAYER BAR -->
-<div id="player-bar">
-  <button id="play-btn" onclick="togglePlay()">⏸</button>
-  <span id="song-title">🎵 rock and roll mcdonalds</span>
-  <div id="progress-container" onclick="seek(event)">
-    <div id="progress-bar"></div>
-  </div>
-  <span id="volume-icon">🔊</span>
-  <input id="volume-slider" type="range" min="0" max="1" step="0.05" value="1" oninput="setVolume(this.value)">
-</div>
-
 <script>
-const song = document.getElementById('song');
-const playBtn = document.getElementById('play-btn');
-const progressBar = document.getElementById('progress-bar');
-
-function startMusic() {
-  document.getElementById('splash').style.display = 'none';
-  song.play();
-  playBtn.textContent = '⏸';
-}
-
-function togglePlay() {
-  if (song.paused) {
-    song.play();
-    playBtn.textContent = '⏸';
-  } else {
-    song.pause();
-    playBtn.textContent = '▶';
-  }
-}
-
-function setVolume(v) {
-  song.volume = v;
-  document.getElementById('volume-icon').textContent = v == 0 ? '🔇' : v < 0.5 ? '🔉' : '🔊';
-}
-
-function seek(e) {
-  const rect = e.currentTarget.getBoundingClientRect();
-  const pct = (e.clientX - rect.left) / rect.width;
-  if (song.duration) song.currentTime = pct * song.duration;
-}
-
-song.addEventListener('timeupdate', () => {
-  if (song.duration) {
-    progressBar.style.width = (song.currentTime / song.duration * 100) + '%';
-  }
-});
-
-// wheel & answers
 const answers = ["evet","hayir","belki","imkani yok","belki","allah bilir","hasta","gec"];
 function getAnswer() {
   document.getElementById('answer').textContent = answers[Math.floor(Math.random()*answers.length)];
